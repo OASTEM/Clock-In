@@ -3,6 +3,51 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/meeting.css">
     <link rel="icon" href="../img/favicon.png">
+    <!--STYLE AND SCRIPT are temporarily there demonstrate UI. Will be replaced with server code-->
+    <style>
+        .container{
+            display: none;   
+        }
+    </style>
+    <script>
+        function removeLogin(){
+            document.getElementsByClassName("no-login-overlay")[0].style.display = "none";
+            document.getElementsByClassName("container")[0].style.display = "block";
+        }
+    </script>
+    <div class="no-login-overlay">
+        <div id="login-box">
+            <div class="row">
+                <div class="col-12"><h1>Please login to continue</h1></div>
+            </div>
+            <div class="row">
+                <div class="col-6" style="background: #7670b3; color:#fff">
+                    <h2>Administrator</h2>
+                    <form>
+                        <div class="row">
+                            <img src="../img/emailwhite.svg"><input type="text">
+                        </div>
+                        <div class="row">
+                            <img src="../img/lockwhite.svg"><input type="password">
+                        </div>
+                    </form>
+                    <button onclick="removeLogin()">Login</button>
+                </div>
+                <div class="col-6" style="background: #fff;">
+                    <h2>Student</h2>
+                    <form>
+                        <div class="row">
+                            <img src="../img/email.svg"><input type="password">
+                        </div>
+                        <div class="row">
+                            <img src="../img/id.svg"><input type="password">
+                        </div>
+                    </form>
+                    <button onclick="removeLogin()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav>
         <a href=""><img src="../img/r11.svg"></a>
     </nav>

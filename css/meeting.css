@@ -1,3 +1,23 @@
+.no-login-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #555;
+}
+
+#login-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    background: #eee;
+    border-radius: 25px;
+    text-align: center;
+}
+
+#login-box img{
+    width: 5%;
+}
 .meeting h1{
     font-size: 2em;
     color: #fff;
@@ -26,7 +46,7 @@
     width: 5%;
 }
 
-.meeting-body input[type="text"], .meeting-body input[type="password"]{
+input[type="text"], input[type="password"]{
     font-size: 2em;
     width: 70%;
     margin: 10px;
@@ -41,4 +61,10 @@
 
 .new-meeting img{
     height: 25px;   
+}
+
+.id{
+    font-family: "Roboto", sans-serif;
+    font-size: 2em;
+    font-weight: 900;
 }

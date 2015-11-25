@@ -62,9 +62,3 @@ input[type="text"], input[type="password"]{
 .new-meeting img{
     height: 25px;   
 }
-
-.id{
-    font-family: "Roboto", sans-serif;
-    font-size: 2em;
-    font-weight: 900;
-}

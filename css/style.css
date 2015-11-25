@@ -32,13 +32,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-    color: #222;
 	line-height: 1;
 }
 ol, ul {
 	list-style: none;
     list-style-type: none;
-    
 }
 blockquote, q {
 	quotes: none;
@@ -63,14 +61,10 @@ table {
     margin-right: auto;
     max-width: 960px;
 }
-
 .container:after{
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
+    content: "";
     clear: both;
-    height: 0;
+    display: block;
 }
 
 .grid-2{width:50%;}
@@ -78,6 +72,7 @@ table {
 .grid-4{width: 25%;}
 
 [class*="grid-"]{
+    float: left;
     display: inline-block;
     vertical-align: top;
     padding: 15px;
@@ -118,7 +113,8 @@ table {
 .black-text{font-weight:900;}
 
 body{
-    background-color: #EEE;
+    color: #222;
+    background-color: #eee;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
@@ -137,7 +133,14 @@ img{
     width: 100%;
     height: auto;
 }
-
+nav{
+    background: #222;
+    height: 120px;
+}
+nav img{
+    padding: 20px 0px;
+    height: 120px;
+}
 @media only screen and (max-width: 768px) {
     [class*="col-"]{
         width: 100%;

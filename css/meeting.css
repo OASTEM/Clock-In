@@ -1,0 +1,44 @@
+.meeting h1{
+    font-size: 2em;
+    color: #fff;
+    padding-top: .5em;
+}
+
+.meeting h2{
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #fff;
+    padding: .5em;
+}
+
+.meeting-body{
+    padding: 1em;
+    text-align: center;
+    background-color: #fff;
+}
+
+.meeting-body a img{
+    padding: 1em 3em;
+    width: 49%;
+}
+
+.meeting-body img{
+    width: 5%;
+}
+
+.meeting-body input[type="text"], .meeting-body input[type="password"]{
+    font-size: 2em;
+    width: 70%;
+    margin: 10px;
+}
+.elapsed{
+    font-size: 2em;   
+}
+
+.tofrom{
+    font-size: 2em;   
+}
+
+.new-meeting img{
+    height: 25px;   
+}

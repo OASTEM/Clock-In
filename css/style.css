@@ -125,6 +125,16 @@ h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
 
+h1{
+    font-size: 3em;   
+}
+h2{
+    font-size: 2em;   
+}
+h3{
+    font-size: 1em;   
+}
+
 .hide-on-desktop{
     display: none;   
 }
@@ -140,6 +150,21 @@ nav{
 nav img{
     padding: 20px 0px;
     height: 120px;
+}
+
+button{
+    font-size: 1em;
+    font-weight: 900;
+    background: #3498db;
+    color: #ffffff;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    transition: .25s background;
+    border: none;
+}
+
+button:hover{
+    background: #3cb0fd;
 }
 @media only screen and (max-width: 768px) {
     [class*="col-"]{

@@ -64,7 +64,7 @@ table {
     max-width: 960px;
 }
 
-.container:after {
+.container:after{
     visibility: hidden;
     display: block;
     font-size: 0;
@@ -96,12 +96,17 @@ table {
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-[class*="col-"] {
+[class*="col-"]{
     float: left;
     padding: 15px;
 }
 
 .row{clear: both;}
+.row:after{
+    content: "";
+    clear: both;
+    display: block;
+}
 
 .center-text{text-align: center;}
 .left-text{text-align: left;}
@@ -126,6 +131,11 @@ h1, h2, h3, h4, h5, h6{
 
 .hide-on-desktop{
     display: none;   
+}
+
+img{
+    width: 100%;
+    height: auto;
 }
 
 @media only screen and (max-width: 768px) {

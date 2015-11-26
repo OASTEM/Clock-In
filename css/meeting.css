@@ -18,6 +18,14 @@
 #login-box img{
     width: 5%;
 }
+
+#login-box #admin{
+    background: #7670b3;
+    color: #fff;
+}
+#login-box #student{
+    
+}
 .meeting h1{
     font-size: 2em;
     color: #fff;
@@ -37,7 +45,12 @@
     background-color: #fff;
 }
 
-.meeting-body a img{
+.meeting-body h1{
+    padding-top: 0;
+    color:#222;   
+}
+
+.meeting-body span img{
     padding: 1em 3em;
     width: 49%;
 }
@@ -50,6 +63,10 @@ input[type="text"], input[type="password"]{
     font-size: 2em;
     width: 70%;
     margin: 10px;
+}
+
+input[type="time"]{
+    font-size: .5em;
 }
 .elapsed{
     font-size: 2em;   

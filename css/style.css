@@ -112,7 +112,7 @@ table {
 .regular-text{font-weight:400;}
 .black-text{font-weight:900;}
 
-body{
+body, input{
     color: #222;
     background-color: #eee;
     font-family: 'Roboto', sans-serif;

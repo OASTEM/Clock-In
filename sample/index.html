@@ -10,9 +10,31 @@
         }
     </style>
     <script>
+        var clockInBody = "<h1>Clock in</h1><form><img src='../img/id.svg'><input type='text'></form><button onclick='backToMeeting()'>Return</button><button onclick='successfulClockIn()'>Clock in</button>";
+        var clockOutBody = "<h1>Clock out</h1><form><img src='../img/id.svg'><input type='text'></form><button onclick='backToMeeting()'>Return</button><button onclick='successfulClockOut()'>Clock out</button>";
+        var meetingBody = "<span id='clock-out'><img src='../img/clock-out.svg'></span><span id='clock-in'><img src='../img/clock-in.svg'></span>                    <div class='elapsed'><span class='black-text'>0:45 </span><span class='light-text'>elapsed</span></div>";
         function removeLogin(){
             document.getElementsByClassName("no-login-overlay")[0].style.display = "none";
             document.getElementsByClassName("container")[0].style.display = "block";
+            document.getElementById("clock-in").addEventListener("click", clockIn);
+            document.getElementById("clock-out").addEventListener("click", clockOut);
+        }
+        function clockIn(){
+            document.getElementsByClassName("meeting-body")[0].innerHTML = clockInBody;   
+        }
+        function clockOut(){
+            document.getElementsByClassName("meeting-body")[0].innerHTML = clockOutBody;
+        }
+        function backToMeeting(){
+            document.getElementsByClassName("meeting-body")[0].innerHTML = meetingBody;
+            document.getElementById("clock-in").addEventListener("click", clockIn);
+            document.getElementById("clock-out").addEventListener("click", clockOut);
+        }
+        function successfulClockIn(){
+            alert("Successfully clocked in!");   
+        }
+        function successfulClockOut(){
+            alert("Successfully clocked out!");   
         }
     </script>
     <div class="no-login-overlay">
@@ -20,8 +42,8 @@
             <div class="row">
                 <div class="col-12"><h1>Please login to continue</h1></div>
             </div>
-            <div class="row">
-                <div class="col-6" style="background: #7670b3; color:#fff">
+            <div class="row" style="background: #fff;">
+                <div class="col-6" id="admin">
                     <h2>Administrator</h2>
                     <form>
                         <div class="row">
@@ -33,12 +55,9 @@
                     </form>
                     <button onclick="removeLogin()">Login</button>
                 </div>
-                <div class="col-6" style="background: #fff;">
+                <div class="col-6" id="student">
                     <h2>Student</h2>
                     <form>
-                        <div class="row">
-                            <img src="../img/email.svg"><input type="password">
-                        </div>
                         <div class="row">
                             <img src="../img/id.svg"><input type="password">
                         </div>
@@ -59,26 +78,28 @@
                     <h2>Hosts: Byron Aguilar, Peter Yang</h2>
                 </div>
                 <div class="meeting-body">
-                    <a href=""><img src="../img/clock-out.svg"></a>
-                    <a href=""><img src="../img/clock-in.svg"></a>
+                    <span id="clock-out"><img src="../img/clock-out.svg"></span>
+                    <span id="clock-in"><img src="../img/clock-in.svg"></span>
                     <div class="elapsed">
                         <span class="black-text">0:45 </span><span class="light-text">elapsed</span>
                     </div>
                 </div>
             </div>
+            <!--
             <div class="meeting grid-2">
                 <div class="meeting-header" style="background-color: #ed5025;">
                     <h1>VEX Meeting</h1>
                     <h2>Hosts: Byron Aguilar, Gabe Lewis</h2>
                 </div>
                 <div class="meeting-body">
-                    <a href=""><img src="../img/clock-out.svg"></a>
-                    <a href=""><img src="../img/clock-in.svg"></a>
+                    <span id="clock-out"><img src="../img/clock-out.svg"></span>
+                    <span id="clock-in"><img src="../img/clock-in.svg"></span>
                     <div class="elapsed">
                         <span class="black-text">0:39 </span><span class="light-text">elapsed</span>
                     </div>
                 </div>
             </div>
+            -->
             <div class="meeting grid-2">
                 <div class="meeting-header" style="background-color: #7670b3;">
                     <h1>Start New Session</h1>
@@ -93,14 +114,11 @@
                             <img src="../img/lock.svg"><input type="password">
                         </div>
                     </form>
-                    <div class="row tofrom">
-                        <div class="col-6">
-                            <span class="black-text">From </span><span class="light-text">3:00</span>
-                        </div>
-                        <div class="col-6">
-                            <span class="black-text">To </span><span class="light-text">4:15</span>
-                        </div>
-                    </div>
+                    <form class="row tofrom">
+                        <input type="time" name="start_time" value="15:00:00">
+                        <span class="light-text" style="vertical-align: middle"> to </span>
+                        <input type="time" name="end_time" value="16:15:00">
+                    </form>
                 </div>
             </div>
         </div>

@@ -2,16 +2,57 @@
 require_once "./common.php";
 
 switch($_GET['action']){
-    case "logincontroladmin":
+    case 0:
+        session_start();
+        session_unset();
+        session_destroy();
+        echo "P200";
+        break;
+    default:
         if($_POST){
-            $table = chairs['admin'];
+            $tables = array("LOGOUT",$chairs['members'],$chairs['admin'],$chairs['admin']);
+            $table = $tables[$_GET['action']];
             $db = get_db();
 
             $email = $db->escape_string($_POST['email']);
             $pin = $db->escape_string(sha1($_POST['pin']));
 
-            $query = "SELECT uid FROM $table WHERE email='$email' AND pin='$pin'";
-            $result $db->query($query);
+            $query = "SELECT * FROM $table WHERE email='$email' AND pin='$pin'";
+            $result = $db->query($query);
+
+            if($result->num_rows == 1){ 
+                $data = $result->fetch_assoc();
+                unset($data['pin']);
+
+                session_unset();
+                session_start();
+
+                $_SESSION['start_time'] = time();
+                $_SESSION['auth_level'] = $_GET['action'];
+                $_SESSION['user'] = $data;
+                
+                $db->close();
+                echo "P200";
+            }else{
+                echo "P403";
+            }
+        }else{
+            echo "P401";
+        }
+        break;
+}
+
+/**switch($_GET['action']){
+    case "logincontroladmin":
+        if($_POST){
+            $table = $chairs['admin'];
+            $db = get_db();
+
+            $email = $db->escape_string($_POST['email']);
+            $pin = $db->escape_string(sha1($_POST['pin']));
+
+            $query = "SELECT * FROM $table WHERE email='$email' AND pin='$pin'";
+            $result = $db->query($query);
 
             if($result->num_rows == 1){ 
                 $data = $result->fetch_assoc();
@@ -30,18 +71,19 @@ switch($_GET['action']){
             }
         }else{
             echo "P401";
+        }
         break;
     
     case "logincontroluser":
         if($_POST){
-            $table = chairs['members'];
+            $table = $chairs['members'];
             $db = get_db();
 
             $email = $db->escape_string($_POST['email']);
             $sid = $db->escape_string($_POST['sid']);
 
-            $query = "SELECT uid FROM $table WHERE email='$email' AND sid='$sid'";
-            $result $db->query($query);
+            $query = "SELECT * FROM $table WHERE email='$email' AND sid='$sid'";
+            $result = $db->query($query);
 
             if($result->num_rows == 1){
                 $data = $result->fetch_assoc();
@@ -62,14 +104,14 @@ switch($_GET['action']){
     
     case "loginpanel":
         if($_POST){
-            $table = chairs['admin'];
+            $table = $chairs['admin'];
             $db = get_db();
 
             $email = $db->escape_string($_POST['email']);
             $pin = $db->escape_string(sha1($_POST['pin']));
 
-            $query = "SELECT uid FROM $table WHERE email='$email' AND pin='$pin'";
-            $result $db->query($query);
+            $query = "SELECT * FROM $table WHERE email='$email' AND pin='$pin'";
+            $result = $db->query($query);
 
             if($result->num_rows == 1){
                 $data = $result->fetch_assoc();
@@ -80,6 +122,7 @@ switch($_GET['action']){
                 $_SESSION['auth_level'] = $PANEL;
                 $_SESSION['user'] = $data;
                 echo "P200";
+                echo var_dump($_SESSION);
             }else{
                 echo "P403";
             }
@@ -91,6 +134,8 @@ switch($_GET['action']){
     case "logout":
         session_unset();
         session_destroy();
-    break;
-}
+        break;
+    default:
+        echo "P400";    
+}*/
 ?>

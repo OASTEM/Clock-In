@@ -14,3 +14,6 @@ if(session_id){
     echo "not logged in";
 }
 ?>
+
+</boby>
+</html>

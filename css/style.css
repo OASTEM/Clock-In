@@ -152,7 +152,7 @@ nav img{
     height: 120px;
 }
 
-button{
+button,input[type="submit"]{
     font-size: 1em;
     font-weight: 900;
     background: #3498db;

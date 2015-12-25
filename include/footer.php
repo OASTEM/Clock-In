@@ -1,5 +1,5 @@
 <?php
-if(session_id){
+if(session_id()){
     echo "logged in as" . $_SESSION['user']['sid'];
     
     if($_SESSION['auth_level'] == $ADMIN){

@@ -6,6 +6,8 @@ $USER = 1; //member logged in to stats/control page
 $ADMIN = 2; //admin logged in to stats/control page
 $PANEL = 3; //panel unlocked for clockin
 
-require_once "./config.php";
+$rt = "/home/bnguyen/Git/Clock-in/";
+
+require_once $rt . "config.php";
 
 ?>

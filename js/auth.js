@@ -14,8 +14,8 @@ $(document).ready(function(){
         console.log("Submit on admin triggered");
         $(this).ajaxSubmit({
             success:function(response){
-                if(response == "P200") location.reload();
-                if(response == "P403") alert("At least use the right PIN number. I mean seriously, are you even trying?");
+                if(response == "P200") location.reload(); //logged in successfully
+                if(response == "P403") alert("At least use the right PIN number. I mean seriously, are you even trying?"); //incorect user/pass
                 else alert("You broke it!");
             }
         });

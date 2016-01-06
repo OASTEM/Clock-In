@@ -5,6 +5,8 @@ require_once "./common.php";
 session_start();
 
 switch($_GET['action']){
+    case "end":
+    
     case "get":
         $db = get_db();
         $table = $chairs['meetings'];
@@ -31,7 +33,6 @@ switch($_GET['action']){
             </div>
         <?php
         }
-        $db->close();
         ?>
             <div class="meeting grid-2">
                 <div class="meeting-header" style="background-color: #7670b3;">
@@ -39,22 +40,29 @@ switch($_GET['action']){
                     <h2>Logged in as <?php echo $_SESSION['user']['first'] . " " . $_SESSION['user']['last']; ?></h2>
                 </div>
                 <div class="meeting-body">
-                    <form id="meeeting-new">
+                    <form id="meeting-new" action="meetings.ajax.php?action=new" method="post">
                         <div class="row">
-                            <img src="../img/email.svg"><input type="text">
+                            <img src="../img/email.svg"><input name="email" type="text">
                         </div>
                         <div class="row">
-                            <img src="../img/lock.svg"><input type="password">
+                            <img src="../img/lock.svg"><input name="pin" type="password">
                         </div>
-                        <section class="row tofrom">
-                            <input type="time" name="start_time" value="15:00:00">
-                            <span class="light-text" style="vertical-align: middle"> to </span>
-                            <input type="time" name="end_time" value="16:15:00">
-                        </section>
+                        <div class="row">
+                            <?php echoHostable($_SESSION['user']['sid'],$db); ?>
+                        </div>
+                        <div class="row tofrom">
+                            <span class="light-text" style="vertical-align: middle"> End: </span>
+                            <input type="datetime-local" name="sch_end" value="<?php  echo date("Y-m-d"); ?> 16:15:00">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Start">
+                        </div>
+                        
                     </form>
                 </div>
             </div>
         <?php
+        $db->close();
         break;
     case "count":
         $db = get_db();
@@ -67,6 +75,46 @@ switch($_GET['action']){
         if($_POST){
             
         }else echo "P401";
+        break;
+    case "new":
+        if(isset($_POST['email']) && isset($_POST['pin']) && isset($_POST['sch_end']) && isset($_POST['sid'])){
+            $db = get_db();
+            
+            $email = $db->real_escape_string($_POST['email']);
+            $pin = $db->real_escape_string(sha1($_POST['pin']));  
+            $uid = $_SESSION['user']['uid'];
+            
+            $table = $chairs['admin'];
+            $query = "SELECT uid FROM $table WHERE pin='$pin' AND email='$email' AND uid = $uid";
+            $result = $db->query($query);
+            $num = $result->num_rows;
+            
+            if($num >= 1){
+                $sid = $db->real_escape_string($_POST['sid']);
+                $sch = $_POST['sch_end'];
+                $sch = new DateTime($sch);
+                $sch = $db->real_escape_string($sch->format("Y-m-d H:i:s"));
+                $start_by = $_SESSION['user']['uid'];
+
+                $table = $chairs['meetings'];
+                $query = "INSERT INTO $table (sid,sch_end,started_by) VALUES ($sid,'$sch',$start_by)";
+                $db->query($query);
+                
+                if($db->affected_rows > 0){
+                    $sid = $_SESSION['user']['sid'];
+                    $mid = $db->insert_id;
+                    
+                    $table = $chairs['shifts'];
+                    $query = "INSERT INTO $table (sid,mid,host) VALUES ($sid,$mid,1)";
+
+                    $db->query($query);
+                    
+                    if($db->affected_rows > 0) echo "P200";
+                    else echo "P500.2";
+                }else echo "P500.1";
+            }else echo "P403";
+        }else echo "P401";
+        
         break;
     
 }
@@ -162,9 +210,9 @@ function echoHostable($sid,$db){
     
     $result = $db->query($query);
     
-    echo "<select name='sid'>"
+    echo "<select name='sid'>";
     
-    while($data = $results->fetch_assoc()){
+    while($data = $result->fetch_assoc()){
         $sid = $data['sid'];
         $name = $data['name'];
         

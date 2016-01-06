@@ -4,17 +4,13 @@
     <link rel="stylesheet" href="../css/meeting.css">
     <link rel="icon" href="../img/favicon.png">
     <!--STYLE AND SCRIPT are temporarily there demonstrate UI. Will be replaced with server code-->
-    <style>
-        .container{
-            display: none;   
-        }
-    </style>
     <script>
-        var clockInBody = "<h1>Clock in</h1><form><img src='../img/id.svg'><input type='text'></form><button onclick='backToMeeting()'>Return</button><button onclick='successfulClockIn()'>Clock in</button>";
+        /**var clockInBody = "<h1>Clock in</h1><form><img src='../img/id.svg'><input type='text'></form><button onclick='backToMeeting()'>Return</button><button onclick='successfulClockIn()'>Clock in</button>";
         var clockOutBody = "<h1>Clock out</h1><form><img src='../img/id.svg'><input type='text'></form><button onclick='backToMeeting()'>Return</button><button onclick='successfulClockOut()'>Clock out</button>";
-        var meetingBody = "<span id='clock-out'><img src='../img/clock-out.svg'></span><span id='clock-in'><img src='../img/clock-in.svg'></span>                    <div class='elapsed'><span class='black-text'>0:45 </span><span class='light-text'>elapsed</span></div>";
+        var meetingBody = "<span id='clock-out'><img src='../img/clock-out.svg'></span><span id='clock-in'><img src='../img/clock-in.svg'></span>                    <div class='elapsed'><span class='black-text'>0:45 </span><span class='light-text'>elapsed</span></div>";*/
         function removeLogin(){
-            document.getElementsByClassName("no-login-overlay")[0].style.display = "none";
+            document.getElementsByClassName("no-login-overlay")[0].style.display = "none";}/*
+            
             document.getElementsByClassName("container")[0].style.display = "block";
             document.getElementById("clock-in").addEventListener("click", clockIn);
             document.getElementById("clock-out").addEventListener("click", clockOut);
@@ -35,7 +31,7 @@
         }
         function successfulClockOut(){
             alert("Successfully clocked out!");   
-        }
+        }*/
     </script>
     <div class="no-login-overlay">
         <div id="login-box">
@@ -81,10 +77,61 @@
                     <span id="clock-out"><img src="../img/clock-out.svg"></span>
                     <span id="clock-in"><img src="../img/clock-in.svg"></span>
                     <div class="elapsed">
-                        <span class="black-text">0:45 </span><span class="light-text">elapsed</span>
+                        <span class="black-text">00:18:01 </span><span class="light-text">elapsed</span>
+                    </div>
+                    <div class="member-list">
+                        <div id="left">  
+                            <div class="person">
+                            <p class="name">Byron Aguilar</p>
+                            <p class="time">00:18</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">James Pham</p>
+                            <p class="time">00:17</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Micahel Duong</p>
+                            <p class="time">00:17</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Spring Nguyen</p>
+                            <p class="time">00:17</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Richard Kwan</p>
+                            <p class="time">00:17</p>
+                            </div>
+                        </div>
+                        <div id="right">
+                            <div class="person">
+                            <p class="name">Brandon Nguyen</p>
+                            <p class="time">00:17</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Taylor Nguyen</p>
+                            <p class="time">00:16</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Peter Yang</p>
+                            <p class="time">00:16</p>
+                            </div>
+                            
+                            <div class="person">
+                            <p class="name">Gabriel Lewis</p>
+                            <p class="time">00:16</p>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <!--
             <div class="meeting grid-2">
                 <div class="meeting-header" style="background-color: #ed5025;">

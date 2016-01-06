@@ -2,7 +2,7 @@
 require_once "./common.php";
 
 switch($_GET['action']){
-    case 0:
+    case 0: case "logout":
         session_start();
         session_unset();
         session_destroy();

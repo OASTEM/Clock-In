@@ -65,7 +65,7 @@ input[type="text"], input[type="password"]{
     margin: 10px;
 }
 
-input[type="time"]{
+input[type="datetime-local"]{
     font-size: .5em;
 }
 .elapsed{
@@ -78,4 +78,33 @@ input[type="time"]{
 
 .new-meeting img{
     height: 25px;   
+}
+
+.member-list #right{
+    float:right;
+    width:50%;
+    padding-left: 0.25em;
+}
+
+.member-list #left{
+    float:left;
+    width:50%;
+    padding-right: 0.25em;
+}
+
+.member-list p{
+    display:inline-block;
+}
+
+.member-list .name{
+    float: left;
+}
+
+.member-list .time{
+    float: right
+}
+
+.member-list .person{
+    clear:both;
+    margin-top:0.3em;
 }

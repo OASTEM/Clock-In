@@ -27,11 +27,12 @@ function updateMeeting(id){
 }
 
 function diff(start){
-    var startDate = new Date(start).getTime();
-    var currDate = new Date().getTime();
+    var start = new Date(start);
+    var startDate = start.getTime()*1000;
+    var currDate = Math.round(Date.now());
     
-    var diffTime = new Date(currDate - startDate);
-    
+    var diffTime = new Date((currDate - startDate) + start.getTimezoneOffset() * 60000);
+        
     return ("0" + diffTime.getHours()).slice(-2) + ":" +("0" + diffTime.getMinutes()).slice(-2) + ":" + ("0" + diffTime.getSeconds()).slice(-2);
 }
 
@@ -40,7 +41,7 @@ $(document).ready(function(){
 });
 
 function updateElapsed(){
-    $('.meeting-elapsed').each(function(){
+    $('.meeting-elapsed').each(function(index){
         var elapsed = diff($(this).data('start'));
         $(this).text(elapsed);
     });
@@ -60,60 +61,57 @@ function loadMeetings(){
 function initInput(){
     $('.scannable').on("submit",function(e){
         e.preventDefault();
-        var mid = $(this).parent().parent().data("mid");
-
-        var elem = $(this);
+        console.log("Triggered.");
         
-        elem.ajaxSubmit({
+        var mid = $(this).parent().parent().data("mid");
+        var sid = $(this).find('#input').val();
+        
+        var form = $(this);
+        
+        $.ajax('members.ajax.php?action=isHost',{
+            method:"POST",
             data:{
-                mid:mid
+                stuid:sid
             },
             success:function(response){
-                if(response == "P200"){
-                    location.reload();
-                }else if(response == "isAdmin"){
-                    var panel = confirm("Load admin panel?");
-                    if(panel){
-                        alert("Feature does not exist");
-                    }else{
-                        elem.ajaxSubmit({
-                            data:{
-                                mid:mid,
-                                out:true
-                            },
-                            success:function(response){
-                                if(response == "P200"){
-                                    alert(response);
-                                    location.reload();
-                                }else{
-                                    alert("You still broke it...\n" + response);
-                                }
-                            }
-                        });
-                    }
-                }else if(response == "isLast"){
-                    var panel = confirm("You are the last person. Add a host?");
-                    if(panel){
-                        alert("Feature does not exist");
-                    }else{
-                        elem.ajaxSubmit({
-                            data:{
-                                mid:mid,
-                                out:true
-                            },
-                            success:function(response){
-                                if(response == "P200"){
-                                    alert(response);
-                                    location.reload();
-                                }else{
-                                    alert("You still broke it...\n" + response);
-                                }
-                            }
-                        });
-                    }
+                if(response == "true" && confirm('Load admin panel?')){
+                    alert("Lol feature no implement.");
                 }else{
-                    alert("You broke it!");
+                    $.ajax('members.ajax.php?action=isLastHost',{
+                        method:"POST",
+                        data:{
+                            stuid:sid
+                        },
+                        success:function(response){
+                            if(response == "true" && confirm("You are the last host. Transfer?")){
+                                alert("Transfering is not something we can do at this time.");
+                                 
+                            }else{
+                                $.ajax('meetings.ajax.php?action=end',{
+                                    method:"POST",
+                                    data:{
+                                        mid:mid,
+                                        end_by:sid
+                                    },
+                                    success:function(response){
+                                        alert(response);
+                                    }
+                                });
+                            }
+                            form.ajaxSubmit();
+                        }
+                    });
                 }
+            }
+        
+        });
+    });
+    
+    $('#meeting-new').on("submit",function(e){
+        e.preventDefault();
+        $(this).ajaxSubmit({
+            success:function(response){
+                alert(response);
             }
         });
     });
